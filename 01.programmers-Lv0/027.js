@@ -2,7 +2,6 @@
 
 function solution(n, control) {
   let answer = n;
-  const arr = control.split("");
   for (let i = 0; i < control.length; i++) {
     switch (control[i]) {
       case "w":

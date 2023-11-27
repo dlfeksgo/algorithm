@@ -3,14 +3,16 @@
 const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
 const score = Number(input[0]);
 
+let result = "";
 if (90 <= score && score <= 100) {
-  console.log("A");
+  result = "A";
 } else if (80 <= score && score <= 89) {
-  console.log("B");
+  result = "B";
 } else if (70 <= score && score <= 79) {
-  console.log("C");
+  result = "C";
 } else if (60 <= score && score <= 69) {
-  console.log("D");
+  result = "D";
 } else {
-  console.log("F");
+  result = "F";
 }
+console.log(result);

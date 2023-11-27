@@ -9,9 +9,7 @@ function solution(arr, queries) {
         newArr.push(arr[i]);
       }
     }
-    newArr.length === 0
-      ? answer.push(-1)
-      : answer.push(Math.min.apply(null, newArr));
+    answer.push(newArr.length === 0 ? -1 : Math.min(...newArr));
   });
   return answer;
 }

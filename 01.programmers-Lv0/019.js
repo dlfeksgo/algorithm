@@ -1,13 +1,15 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/181934
 
 function solution(ineq, eq, n, m) {
+  let result;
   if (ineq === ">" && eq === "=") {
-    return n >= m ? 1 : 0;
+    result = n >= m;
   } else if (ineq === "<" && eq === "=") {
-    return n <= m ? 1 : 0;
+    result = n <= m;
   } else if (ineq === ">" && eq === "!") {
-    return n > m ? 1 : 0;
+    result = n > m;
   } else if (ineq === "<" && eq === "!") {
-    return n < m ? 1 : 0;
+    result = n < m;
   }
+  return result ? 1 : 0;
 }

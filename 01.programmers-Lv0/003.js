@@ -13,9 +13,5 @@ rl.on("line", function (line) {
 }).on("close", function () {
   const str = input[0];
   const n = Number(input[1]);
-  const strArr = [];
-  for (let i = 0; i < n; i++) {
-    strArr.push(str);
-  }
-  console.log(strArr.join(""));
+  console.log(str.repeat(n));
 });
