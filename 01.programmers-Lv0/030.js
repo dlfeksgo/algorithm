@@ -1,6 +1,6 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/181923
 
-function solution(arr, queries) {
+export function solution(arr, queries) {
 	const result = [];
 	for (const query of queries) {
 		const data = [];

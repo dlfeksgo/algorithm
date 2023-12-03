@@ -1,10 +1,10 @@
 //https://www.acmicpc.net/problem/18870
 
-const [n, ...numbers] = require("fs")
-  .readFileSync("/dev/stdin")
-  .toString()
-  .trim()
-  .split("\n");
+const [, ...numbers] = require("fs")
+	.readFileSync("/dev/stdin")
+	.toString()
+	.trim()
+	.split("\n");
 
 const arr = numbers[0].split(" ").map(Number);
 const uniqueArr = [...new Set(arr)].sort((a, b) => a - b);
@@ -12,7 +12,7 @@ const map = new Map();
 uniqueArr.forEach((v, i) => map.set(v, i));
 let result = "";
 for (const v of arr) {
-  result += map.get(v) + " ";
+	result += map.get(v) + " ";
 }
 console.log(result);
 

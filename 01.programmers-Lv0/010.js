@@ -1,9 +1,9 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/181943
 
-function solution(my_string, overwrite_string, s) {
-  let str = [];
-  str = my_string.split("");
-  str.splice(s, overwrite_string.length, overwrite_string);
+export function solution(my_string, overwrite_string, s) {
+	let str = [];
+	str = my_string.split("");
+	str.splice(s, overwrite_string.length, overwrite_string);
 
-  return str.join("");
+	return str.join("");
 }

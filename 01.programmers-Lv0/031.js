@@ -1,6 +1,6 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/181922
 
-function solution(arr, queries) {
+export function solution(arr, queries) {
 	for (const query of queries) {
 		for (let i = query[0]; i <= query[1]; i++) {
 			i % query[2] === 0 ? (arr[i] += 1) : "";

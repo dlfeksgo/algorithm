@@ -1,6 +1,6 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/181931
 
-function solution(a, d, included) {
+export function solution(a, d, included) {
 	const value = [];
 	const result = [];
 	included.forEach((v, i) => {

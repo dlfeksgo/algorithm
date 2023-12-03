@@ -1,6 +1,6 @@
 //https://www.acmicpc.net/problem/2750
 
-const [n, ...numbers] = require("fs")
+const [, ...numbers] = require("fs")
 	.readFileSync("/dev/stdin")
 	.toString()
 	.trim()
