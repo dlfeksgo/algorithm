@@ -9,7 +9,9 @@ const [, ...numbers] = require("fs")
 const arr = numbers[0].split(" ").map(Number);
 const uniqueArr = [...new Set(arr)].sort((a, b) => a - b);
 const map = new Map();
-uniqueArr.forEach((v, i) => map.set(v, i));
+for (let i = 0; i < uniqueArr.length; i++) {
+	map.set(uniqueArr[i], i);
+}
 let result = "";
 for (const v of arr) {
 	result += map.get(v) + " ";

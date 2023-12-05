@@ -7,9 +7,7 @@ const [, ...numbers] = require("fs")
 	.split("\n");
 let answer = "";
 const arr = numbers.map((v) => v.split(" ").map(Number));
-arr.sort(function (a, b) {
-	return a[0] - b[0] === 0 ? a[1] - b[1] : a[0] - b[0];
-});
+arr.sort((a, b) => (a[0] - b[0] === 0 ? a[1] - b[1] : a[0] - b[0]));
 for (const v of arr) {
 	answer += v[0] + " " + v[1] + "\n";
 }

@@ -2,7 +2,5 @@
 
 const input = require("fs").readFileSync("/dev/stdin").toString().split(" ");
 const arr = input.map(Number);
-arr.sort(function (a, b) {
-	return a - b;
-});
+arr.sort((a, b) => a - b);
 console.log(arr.join(" "));
