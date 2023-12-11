@@ -13,12 +13,8 @@ rl.on('line', function (line: string) {
 }).on('close', function () {
     const str = input[0];
     const arr: string[] = [];
-    for (let i = 0; i < str.length; i++) {
-        if (str[i] === str[i].toUpperCase()) {
-            arr.push(str[i].toLowerCase());
-        } else {
-            arr.push(str[i].toUpperCase());
-        }
+    for (const v of str) {
+        arr.push(v === v.toUpperCase() ? v.toLowerCase() : v.toUpperCase());
     }
     console.log(arr.join(''));
 });

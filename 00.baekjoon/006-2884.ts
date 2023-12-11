@@ -1,22 +1,19 @@
 //https://www.acmicpc.net/problem/2884
 
 const input: string[] = require('fs')
-    .readFileSync('/dev/stdin')
+    .readFileSync('input.txt')
     .toString()
     .split('\n')[0]
     .split(' ');
-let hour = Number(input[0]);
-let minute = Number(input[1]);
-const SETTING_TIME = 45;
 
-if (minute < SETTING_TIME) {
-    hour -= 1;
-    minute += 60 - SETTING_TIME;
-    if (hour < 0) {
-        hour = 23;
-    }
-} else {
-    minute -= SETTING_TIME;
-}
+let [hour, minute] = input.map(Number);
+
+if (hour === 0) hour = 24;
+
+let time = hour * 60 + minute - 45;
+time %= 1440;
+
+hour = Math.floor(time / 60);
+minute = time % 60;
 
 console.log(hour + ' ' + minute);

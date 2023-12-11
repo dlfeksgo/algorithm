@@ -4,11 +4,14 @@ export function solution(arr: number[]) {
     const stk: number[] = [];
     let i = 0;
     while (i < arr.length) {
-        if (stk[stk.length - 1] >= arr[i]) stk.pop();
-        else {
+        if (stk.length === 0 || stk.at(-1)! < arr[i]) {
             stk.push(arr[i]);
             i++;
+        } else {
+            stk.pop();
         }
     }
     return stk;
 }
+
+console.log(solution([1, 4, 2, 5, 3]));
