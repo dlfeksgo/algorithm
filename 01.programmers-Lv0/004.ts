@@ -14,13 +14,11 @@ rl.on('line', function (line: string) {
     const str = input[0];
     const arr: string[] = [];
     for (let i = 0; i < str.length; i++) {
-        let txt = '';
         if (str[i] === str[i].toUpperCase()) {
-            txt = str[i].toLowerCase();
+            arr.push(str[i].toLowerCase());
         } else {
-            txt = str[i].toUpperCase();
+            arr.push(str[i].toUpperCase());
         }
-        arr.push(txt);
     }
     console.log(arr.join(''));
 });

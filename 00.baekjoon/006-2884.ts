@@ -7,15 +7,16 @@ const input: string[] = require('fs')
     .split(' ');
 let hour = Number(input[0]);
 let minute = Number(input[1]);
+const SETTING_TIME = 45;
 
-if (minute < 45) {
+if (minute < SETTING_TIME) {
     hour -= 1;
-    minute += 15;
+    minute += 60 - SETTING_TIME;
     if (hour < 0) {
         hour = 23;
     }
 } else {
-    minute -= 45;
+    minute -= SETTING_TIME;
 }
 
 console.log(hour + ' ' + minute);

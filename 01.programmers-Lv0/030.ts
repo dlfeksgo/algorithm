@@ -2,11 +2,8 @@
 
 export function solution(arr: number[], queries: number[][]) {
     const result = [];
-    for (const query of queries) {
-        const data = [];
-        for (let i = query[0]; i <= query[1]; i++) {
-            if (i > query[2]) data.push(arr[i]);
-        }
+    for (const [s, e, k] of queries) {
+        const data = arr.slice(s, e + 1).filter((v) => v > k);
         result.push(data.length === 0 ? -1 : Math.min(...data));
     }
     return result;

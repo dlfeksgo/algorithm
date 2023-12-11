@@ -6,7 +6,7 @@ const input: string[] = require('fs')
     .split('\n');
 const score = Number(input[0]);
 
-let grade: string = '';
+let grade: string;
 if (90 <= score && score <= 100) {
     grade = 'A';
 } else if (80 <= score && score <= 89) {
