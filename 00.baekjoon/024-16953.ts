@@ -17,7 +17,7 @@ while (b >= a) {
     if (b % 2 === 0) {
         b /= 2;
     } else if (b % 2 === 1) {
-        b = parseInt(String(b / 10));
+        b = Math.floor(b / 10);
     } else break;
     count += 1;
 }

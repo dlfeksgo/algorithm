@@ -6,10 +6,7 @@ export function solution(l: number, r: number) {
         const delCount = String(i)
             .split('')
             .filter((v) => v !== '5' && v !== '0').length;
-        delCount === 0 && answer.push(i);
+        if (!delCount) answer.push(i);
     }
-    answer.length === 0 && answer.push(-1);
-    return answer;
+    return answer.length === 0 ? [-1] : answer;
 }
-
-console.log(solution(5, 555));

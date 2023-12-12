@@ -11,7 +11,7 @@ let [hour, minute] = input.map(Number);
 if (hour === 0) hour = 24;
 
 let time = hour * 60 + minute - 45;
-time %= 1440;
+time %= 60 * 24;
 
 hour = Math.floor(time / 60);
 minute = time % 60;
