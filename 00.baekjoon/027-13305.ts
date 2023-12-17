@@ -6,15 +6,19 @@ const [, d, p]: string[] = require('fs')
     .trim()
     .split('\n');
 
-const distances = d.split(' ').map((v) => BigInt(v));
-const price = p.split(' ').map((v) => BigInt(v));
+const distances = d.split(' ').map(Number);
+const price = p.split(' ').map(Number);
 
-let answer = BigInt(0);
 let oilPrice = price[0];
 
 for (const [i] of distances.entries()) {
-    answer += oilPrice * distances[i];
-    if (oilPrice > price[i + 1]) oilPrice = price[i + 1];
+    oilPrice = Math.min(oilPrice, price[i]);
+    price[i] = oilPrice;
+}
+
+let answer = BigInt(0);
+for (const [i, distance] of distances.entries()) {
+    answer += BigInt(price[i]) * BigInt(distance);
 }
 
 console.log(String(answer));
