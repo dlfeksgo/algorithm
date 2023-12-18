@@ -11,14 +11,10 @@ const price = p.split(' ').map(Number);
 
 let oilPrice = price[0];
 
-for (const [i] of distances.entries()) {
-    oilPrice = Math.min(oilPrice, price[i]);
-    price[i] = oilPrice;
-}
-
 let answer = BigInt(0);
 for (const [i, distance] of distances.entries()) {
-    answer += BigInt(price[i]) * BigInt(distance);
+    oilPrice = Math.min(oilPrice, price[i]);
+    answer += BigInt(oilPrice) * BigInt(distance);
 }
 
 console.log(String(answer));
