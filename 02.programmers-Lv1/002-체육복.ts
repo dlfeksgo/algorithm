@@ -9,21 +9,19 @@ export function solution(n: number, lost: number[], reserve: number[]) {
     for (const v of reserve) {
         students[v - 1] += 1;
     }
-    const checkAndChangeQuantity = (i: number) => {
-        if (students[i - 1] === 2) {
-            students[i - 1] = 1;
-            return true;
-        } else if (students[i + 1] === 2) {
-            students[i + 1] = 1;
-            return true;
+
+    const transferUniform = (beforeIdx: number, afterIdx: number) => {
+        if (students[beforeIdx] === 2) {
+            students[beforeIdx] = 1;
+            students[beforeIdx + 1] = 1;
+        } else if (students[afterIdx] === 2) {
+            students[afterIdx] = 1;
+            students[afterIdx - 1] = 1;
         }
-        return false;
     };
 
     for (const [i, student] of students.entries()) {
-        let isPossible = false;
-        if (student === 0) isPossible = checkAndChangeQuantity(i);
-        if (isPossible) students[i] = 1;
+        if (student === 0) transferUniform(i - 1, i + 1);
     }
 
     let answer = 0;
