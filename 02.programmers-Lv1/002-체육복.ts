@@ -9,14 +9,21 @@ export function solution(n: number, lost: number[], reserve: number[]) {
     for (const v of reserve) {
         students[v - 1] += 1;
     }
-    const compare = (i: number) => {
-        if (students[i - 1] === 2) return (students[i - 1] = 1);
-        else if (students[i + 1] === 2) return (students[i + 1] = 1);
+    const checkAndChangeQuantity = (i: number) => {
+        if (students[i - 1] === 2) {
+            students[i - 1] = 1;
+            return true;
+        } else if (students[i + 1] === 2) {
+            students[i + 1] = 1;
+            return true;
+        }
+        return false;
     };
 
     for (const [i, student] of students.entries()) {
-        const result = student === 0 && compare(i);
-        if (result) students[i] = 1;
+        let isPossible = false;
+        if (student === 0) isPossible = checkAndChangeQuantity(i);
+        if (isPossible) students[i] = 1;
     }
 
     let answer = 0;
