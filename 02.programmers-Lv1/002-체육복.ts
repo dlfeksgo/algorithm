@@ -11,7 +11,7 @@ export function solution(n: number, lost: number[], reserve: number[]) {
     }
 
     const transferUniform = (reserveIdx: number, lostIdx: number) => {
-        if (students[reserveIdx] !== 2) return;
+        if (students[reserveIdx] < 2) return;
         students[reserveIdx] = 1;
         students[lostIdx] = 1;
     };
