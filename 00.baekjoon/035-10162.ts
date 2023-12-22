@@ -2,19 +2,18 @@
 
 const input: string = require('fs').readFileSync('input.txt').toString().trim();
 
-let n = Number(input);
-let answer = '';
+const n = Number(input);
+const MS = [300, 60, 10];
 
 const solution = (n: number) => {
-    answer += Math.floor(n / 300) + ' ';
-    n %= 300;
-    answer += Math.floor(n / 60) + ' ';
-    n %= 60;
-    answer += Math.floor(n / 10);
-    n %= 10;
+    const answer = MS.map((ms) => {
+        const count = Math.floor(n / ms);
+        n %= ms;
+        return count;
+    });
 
     if (n > 0) return -1;
-    return answer;
+    return answer.join(' ');
 };
 
-console.log(solution(n));
+solution(n);

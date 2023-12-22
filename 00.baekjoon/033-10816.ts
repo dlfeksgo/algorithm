@@ -14,11 +14,6 @@ const N = numN
     .sort((a, b) => a - b);
 
 const M = numM.split(' ').map(Number);
+const answer = M.map((v) => countByRange(N, v, v));
 
-let answer = '';
-for (const m of M) {
-    const count = countByRange(N, m, m);
-    answer += count + ' ';
-}
-
-console.log(answer);
+console.log(answer.join(' '));

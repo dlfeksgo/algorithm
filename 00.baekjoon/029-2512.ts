@@ -9,22 +9,23 @@ const [, b, t]: string[] = require('fs')
 const budgets = b.split(' ').map(Number);
 const totalBudget = Number(t);
 
-let start = 1;
-let end = Math.max(...budgets);
+let low = 1;
+let high = Math.max(...budgets);
 
-let result = 0;
-while (start <= end) {
-    let mid = Math.floor((start + end) / 2);
+let maxBudget = 0;
+
+const bs = (low: number, high: number) => {
+    if (low > high) return;
+    let mid = Math.floor((low + high) / 2);
     let sum = 0;
     for (const v of budgets) {
         sum += Math.min(mid, v);
     }
     if (sum <= totalBudget) {
-        result = mid;
-        start = mid + 1;
-    } else {
-        end = mid - 1;
-    }
-}
+        maxBudget = mid;
+        bs(mid + 1, high);
+    } else bs(low, mid - 1);
+};
 
-console.log(result);
+bs(low, high);
+console.log(maxBudget);

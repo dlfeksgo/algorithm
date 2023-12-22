@@ -9,24 +9,25 @@ const [input, ...lines]: string[] = require('fs')
 const [, N] = input.split(' ').map(Number);
 const lans = lines.map(Number);
 
-let start = 1;
-let end = Math.max(...lans);
+let low = 1;
+let high = Math.max(...lans);
 let length = 0;
 
-while (start <= end) {
-    let mid_length = Math.floor((start + end) / 2);
-
+const bs = (low: number, high: number) => {
+    if (low > high) return;
+    let mid = Math.floor((low + high) / 2);
     let sum = 0;
 
     for (const lan of lans) {
-        sum += Math.floor(lan / mid_length);
+        sum += Math.floor(lan / mid);
     }
 
-    if (sum < N) end = mid_length - 1;
+    if (sum < N) bs(low, mid - 1);
     else {
-        length = mid_length;
-        start = mid_length + 1;
+        length = mid;
+        bs(mid + 1, high);
     }
-}
+};
 
+bs(low, high);
 console.log(length);

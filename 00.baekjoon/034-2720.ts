@@ -9,15 +9,14 @@ const [, ...lines]: string[] = require('fs')
 const coins = [25, 10, 5, 1];
 const testCases = lines.map(Number);
 
-let answer = '';
+const answer = testCases.map((v) =>
+    coins
+        .map((coin) => {
+            const count = Math.floor(v / coin) + ' ';
+            v %= coin;
+            return count;
+        })
+        .join(''),
+);
 
-for (let v of testCases) {
-    let count = '';
-    for (const coin of coins) {
-        count += Math.floor(v / coin) + ' ';
-        v %= coin;
-    }
-    answer += count + '\n';
-}
-
-console.log(answer);
+console.log(answer.join('\n'));
