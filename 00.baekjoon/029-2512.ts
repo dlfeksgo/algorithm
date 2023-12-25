@@ -14,18 +14,23 @@ let high = Math.max(...budgets);
 
 let maxBudget = 0;
 
-const bs = (low: number, high: number) => {
-    if (low > high) return;
-    let mid = Math.floor((low + high) / 2);
+const calcSum = (mid: number) => {
     let sum = 0;
     for (const v of budgets) {
         sum += Math.min(mid, v);
     }
-    if (sum <= totalBudget) {
-        maxBudget = mid;
-        bs(mid + 1, high);
-    } else bs(low, mid - 1);
+    return sum;
 };
 
-bs(low, high);
+const bs = (target: number, low: number, high: number) => {
+    if (low > high) return;
+    let mid = Math.floor((low + high) / 2);
+    let sum = calcSum(mid);
+    if (sum <= target) {
+        maxBudget = mid;
+        bs(totalBudget, mid + 1, high);
+    } else bs(totalBudget, low, mid - 1);
+};
+
+bs(totalBudget, low, high);
 console.log(maxBudget);

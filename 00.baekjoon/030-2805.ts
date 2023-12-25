@@ -14,19 +14,24 @@ let high = Math.max(...trees);
 
 let height = 0;
 
-const bs = (low: number, high: number) => {
-    if (low > high) return;
-    let mid = Math.floor((low + high) / 2);
+const calcRest = (mid: number) => {
     let rest = 0;
     for (const tree of trees) {
         if (tree > mid) rest += tree - mid;
     }
-    if (rest < requiredTree) bs(low, mid - 1);
+    return rest;
+};
+
+const bs = (target: number, low: number, high: number) => {
+    if (low > high) return;
+    let mid = Math.floor((low + high) / 2);
+    const rest = calcRest(mid);
+    if (rest < target) bs(requiredTree, low, mid - 1);
     else {
         height = mid;
-        bs(mid + 1, high);
+        bs(requiredTree, mid + 1, high);
     }
 };
 
-bs(low, high);
+bs(requiredTree, low, high);
 console.log(height);

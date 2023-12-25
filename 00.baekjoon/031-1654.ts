@@ -13,21 +13,24 @@ let low = 1;
 let high = Math.max(...lans);
 let length = 0;
 
-const bs = (low: number, high: number) => {
-    if (low > high) return;
-    let mid = Math.floor((low + high) / 2);
+const calcSum = (mid: number) => {
     let sum = 0;
-
     for (const lan of lans) {
         sum += Math.floor(lan / mid);
     }
+    return sum;
+};
 
-    if (sum < N) bs(low, mid - 1);
+const bs = (target: number, low: number, high: number) => {
+    if (low > high) return;
+    let mid = Math.floor((low + high) / 2);
+    const sum = calcSum(mid);
+    if (sum < target) bs(N, low, mid - 1);
     else {
         length = mid;
-        bs(mid + 1, high);
+        bs(N, mid + 1, high);
     }
 };
 
-bs(low, high);
+bs(N, low, high);
 console.log(length);
