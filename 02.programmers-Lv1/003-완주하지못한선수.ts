@@ -4,12 +4,14 @@ export function solution(participant: string[], completion: string[]) {
     const map = new Map();
 
     for (const person of participant) {
-        if (map.has(person)) map.set(person, 1);
-        else map.set(person, map.get(person) ?? +1);
+        if (!map.get(person)) map.set(person, 1);
+        else map.set(person, (map.get(person) ?? 0) + 1);
     }
+
     for (const person of completion) {
         map.set(person, map.get(person) - 1);
     }
+
     for (const [person, isCompleted] of map.entries()) {
         if (isCompleted) return person;
     }
