@@ -1,5 +1,7 @@
 //https://www.acmicpc.net/problem/2805
 
+import { binarySearch } from '../templates/bs';
+
 const [n, t]: string[] = require('fs')
     .readFileSync('input.txt')
     .toString()
@@ -7,31 +9,22 @@ const [n, t]: string[] = require('fs')
     .split('\n');
 
 const requiredTree = n.split(' ').map(Number)[1];
-const trees = t.split(' ').map(Number);
+const trees = t
+    .split(' ')
+    .map(Number)
+    .sort((a, b) => a - b);
 
 let low = 0;
-let high = Math.max(...trees);
+let high = trees[trees.length - 1];
 
-let height = 0;
-
-const calcRest = (mid: number) => {
+const comparator = (mid: number, target: number): number => {
     let rest = 0;
     for (const tree of trees) {
         if (tree > mid) rest += tree - mid;
     }
-    return rest;
+    if (rest >= target) return 1;
+    else return -1;
 };
 
-const bs = (target: number, low: number, high: number) => {
-    if (low > high) return;
-    let mid = Math.floor((low + high) / 2);
-    const rest = calcRest(mid);
-    if (rest < target) bs(requiredTree, low, mid - 1);
-    else {
-        height = mid;
-        bs(requiredTree, mid + 1, high);
-    }
-};
-
-bs(requiredTree, low, high);
+const height = binarySearch(trees, requiredTree, low, high, comparator);
 console.log(height);
