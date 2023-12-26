@@ -3,19 +3,9 @@
 export function solution(participant: string[], completion: string[]) {
     const map = new Map();
 
-    const getParticipant = (p: string) => {
-        const v = map.get(p);
-        if (v) return v + 1;
-        else return 1;
-    };
-
-    const setParticipant = (k: string, v: number) => {
-        map.set(k, v);
-    };
-
     for (const person of participant) {
-        const value = getParticipant(person);
-        setParticipant(person, value);
+        if (map.has(person)) map.set(person, 1);
+        else map.set(person, map.get(person) ?? +1);
     }
     for (const person of completion) {
         map.set(person, map.get(person) - 1);
