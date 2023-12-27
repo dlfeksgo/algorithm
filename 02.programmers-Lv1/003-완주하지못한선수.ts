@@ -4,8 +4,8 @@ export function solution(participant: string[], completion: string[]) {
     const map = new Map();
 
     for (const person of participant) {
-        if (!map.get(person)) map.set(person, 1);
-        else map.set(person, (map.get(person) ?? 0) + 1);
+        const value = (map.get(person) ?? 0) + 1;
+        map.set(person, value);
     }
 
     for (const person of completion) {
