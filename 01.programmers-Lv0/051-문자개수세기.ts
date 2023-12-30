@@ -12,8 +12,5 @@ export function solution(my_string: string) {
         map.set(char, data);
     }
 
-    return alphabet.split('').map((v) => {
-        const data = map.get(v);
-        return data ? data : 0;
-    });
+    return alphabet.split('').map((v) => map.get(v) ?? 0);
 }

@@ -2,7 +2,6 @@
 
 export function solution(genres: string[], plays: number[]) {
     const map = new Map();
-    const answer: number[] = [];
 
     for (const [id, play] of plays.entries()) {
         const genre = genres[id];
@@ -15,14 +14,11 @@ export function solution(genres: string[], plays: number[]) {
         .map((genre, id) => ({ id, genre, play: plays[id] }))
         .sort((a, b) => b.play - a.play);
 
-    for (const [targetGenre] of descSum) {
-        let count = 0;
+    return descSum.flatMap(([targetGenre]) => {
+        const musicIds: number[] = [];
         for (const { id, genre } of musics) {
-            if (targetGenre === genre && count < 2) {
-                count++;
-                answer.push(id);
-            }
+            if (targetGenre === genre) musicIds.push(id);
         }
-    }
-    return answer;
+        return musicIds.splice(0, 2);
+    });
 }
