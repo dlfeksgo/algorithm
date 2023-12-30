@@ -9,11 +9,12 @@ export function solution(players: string[], callings: string[]) {
 
     for (const callName of callings) {
         const rank = map.get(callName);
-        let temp = players[rank - 1];
-        players[rank - 1] = players[rank];
-        players[rank] = temp;
 
-        map.set(callName, map.get(callName) - 1);
+        let front = players[rank - 1];
+        players[rank - 1] = players[rank];
+        players[rank] = front;
+
+        map.set(callName, rank - 1);
         map.set(players[rank], map.get(players[rank]) + 1);
     }
     return players;

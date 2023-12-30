@@ -1,7 +1,6 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/42579
 
 export function solution(genres: string[], plays: number[]) {
-    const albums = [];
     const map = new Map();
     const answer: number[] = [];
 
@@ -9,22 +8,19 @@ export function solution(genres: string[], plays: number[]) {
         const genre = genres[id];
         const sum = (map.get(genre) ?? 0) + play;
         map.set(genre, sum);
-        albums.push({
-            id,
-            genre,
-            play,
-        });
     }
 
-    const mapToArr = [...map].sort((a, b) => b[1] - a[1]);
-    const sortedAlbums = albums.sort((a, b) => b.play - a.play);
+    const descSum = [...map].sort((a, b) => b[1] - a[1]);
+    const musics = genres
+        .map((genre, id) => ({ id, genre, play: plays[id] }))
+        .sort((a, b) => b.play - a.play);
 
-    for (const [targetGenre] of mapToArr) {
+    for (const [targetGenre] of descSum) {
         let count = 0;
-        for (const { id, genre } of sortedAlbums) {
-            if (targetGenre === genre) {
+        for (const { id, genre } of musics) {
+            if (targetGenre === genre && count < 2) {
                 count++;
-                if (count <= 2) answer.push(id);
+                answer.push(id);
             }
         }
     }
