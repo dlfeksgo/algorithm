@@ -17,8 +17,9 @@ export function solution(genres: string[], plays: number[]) {
     return descSum.flatMap(([targetGenre]) => {
         const musicIds: number[] = [];
         for (const { id, genre } of musics) {
+            if (musicIds.length > 1) break;
             if (targetGenre === genre) musicIds.push(id);
         }
-        return musicIds.splice(0, 2);
+        return musicIds;
     });
 }
