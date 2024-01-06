@@ -2,14 +2,14 @@
 
 export function solution(priorities: number[], location: number) {
     let count = 0;
-    const queue = priorities.map((v, i) => [v, i]);
+    const [...queue] = priorities.entries();
     while (queue.length > 0) {
-        const value = queue.shift() as number[];
-        if (queue.some(([v]) => value[0] < v)) {
+        const value = queue.shift()!;
+        if (queue.some(([, v]) => value[1] < v)) {
             queue.push(value);
         } else {
             count++;
-            if (location === value[1]) return count;
+            if (location === value[0]) return count;
         }
     }
 }

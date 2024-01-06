@@ -3,8 +3,7 @@
 export function solution(arr: number[]) {
     const answer = [];
     for (const [i, v] of arr.entries()) {
-        answer.push(v);
-        if (v === arr[i - 1]) answer.pop();
+        if (v !== arr[i - 1]) answer.push(v);
     }
     return answer;
 }
