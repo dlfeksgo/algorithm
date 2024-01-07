@@ -2,7 +2,7 @@
 
 export function solution(priorities: number[], location: number) {
     let count = 0;
-    const [...queue] = priorities.entries();
+    const queue = [...priorities.entries()];
     while (queue.length > 0) {
         const value = queue.shift()!;
         if (queue.some(([, v]) => value[1] < v)) {
