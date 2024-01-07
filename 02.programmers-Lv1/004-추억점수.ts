@@ -12,9 +12,7 @@ export function solution(
         map.set(person, yearning[i]);
     }
 
-    const yearnings = photo.map((group) =>
-        group.map((person) => map.get(person) ?? 0),
-    );
+    const yearnings = photo.map((v) => v.map((person) => map.get(person) ?? 0));
 
-    return yearnings.map((yearning) => _.sum(yearning));
+    return yearnings.map(_.sum);
 }
