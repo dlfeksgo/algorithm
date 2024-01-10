@@ -14,12 +14,10 @@ export function solution(genres: string[], plays: number[]) {
         .map((genre, id) => ({ id, genre, play: plays[id] }))
         .sort((a, b) => b.play - a.play);
 
-    return descSum.flatMap(([targetGenre]) => {
-        const musicIds: number[] = [];
-        for (const { id, genre } of musics) {
-            if (musicIds.length > 1) break;
-            if (targetGenre === genre) musicIds.push(id);
-        }
-        return musicIds;
-    });
+    return descSum.flatMap(([targetGenre]) =>
+        musics
+            .filter(({ genre }) => genre === targetGenre)
+            .splice(0, 2)
+            .map(({ id }) => id),
+    );
 }
