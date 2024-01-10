@@ -8,24 +8,29 @@ function getCharDistance(str: string) {
 }
 
 export function solution(name: string) {
-    const distances = name.split('').map(getCharDistance);
-    const chageCount = distances.reduce((a, b) => a + b);
+    const totalChangeCount = name
+        .split('')
+        .map(getCharDistance)
+        .reduce((a, b) => a + b);
 
-    let minCursorCount = distances.length - 1;
+    let minMoveCount = name.length - 1; //A가 없는 경우의 최솟값
 
-    for (const charIdx of distances.keys()) {
+    const getMinMoveFromChar = (idx: number, cursor: number) => {
+        const rest = name.length - cursor;
+        const leftTurn = idx * 2 + rest;
+        const rightTurn = idx + 2 * rest;
+        return Math.min(minMoveCount, leftTurn, rightTurn);
+    };
+
+    for (const charIdx of [...name].keys()) {
         let cursorCount = charIdx + 1;
-
-        while (cursorCount < distances.length && distances[cursorCount] === 0)
+        while (cursorCount < name.length && name[cursorCount] === 'A')
             cursorCount++;
 
-        const rest = distances.length - cursorCount;
-        minCursorCount = Math.min(
-            minCursorCount, //정방향 이동
-            charIdx * 2 + rest, //현재 문자까지 이동 거리 + 그만큼 돌아가기 + A를 제외한 나머지 문자 길이
-            charIdx + 2 * rest, //A를 제외한 나머지 문자 길이로 역방향 이동 + 그만큼 돌아가기 + 현재 문자까지 이동 거리
-        );
+        //문자마다 완성할 수 있는 최솟값이 달라진다.
+        //마지막 순회를 마칠 때까지의 가장 작은 값을 찾는다.
+        minMoveCount = getMinMoveFromChar(charIdx, cursorCount);
     }
 
-    return chageCount + minCursorCount;
+    return totalChangeCount + minMoveCount;
 }
