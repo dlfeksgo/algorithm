@@ -12,21 +12,19 @@ export function solution(
     while (truck_weights.length || trucks.length) {
         if (
             weight >= sum + truck_weights[0] &&
-            trucks.length <= bridge_length
+            bridge_length >= trucks.length
         ) {
-            const t = truck_weights.shift() as number;
-            sum += t;
-            trucks.push([t, sec + bridge_length]); //여기가 이해안됨
+            const truckWeight = truck_weights.shift()!;
+            sum += truckWeight;
+
+            //sec + bridge_length: 누적 시간 + 다리 길이 | 올라온 트럭이 다리를 지나는데 걸리는 최소 시간
+            trucks.push([truckWeight, sec + bridge_length]);
             sec++;
         } else {
-            const [truck, passedSec] = trucks.shift() as number[];
-            if (sec < passedSec) {
-                sec = passedSec;
-            }
-            sum -= truck;
+            const [passedTruckWeight, passedSec] = trucks.shift()!;
+            if (sec < passedSec) sec = passedSec;
+            sum -= passedTruckWeight;
         }
     }
-    return sec + 1;
+    return sec + 1; //마지막 트럭이 빠져나가는 시간 +1 추가
 }
-
-console.log(solution(2, 10, [7, 4, 5, 6]));
