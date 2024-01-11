@@ -1,24 +1,26 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/178871
 
 export function solution(players: string[], callings: string[]) {
-    const map = new Map();
+    const rankedList: { [key: string]: number } = {};
 
     for (const [rank, player] of players.entries()) {
-        map.set(player, rank);
+        rankedList[player] = rank;
     }
 
-    const replaceRanking = (rank: number) => {
-        let front = players[rank - 1];
-        players[rank - 1] = players[rank];
-        players[rank] = front;
-        return players[rank];
+    const replacePlayer = (backRank: number, frontRank: number) => {
+        const calledPlayer = players[backRank];
+        const frontPlayer = players[frontRank];
+
+        players[frontRank] = calledPlayer;
+        players[backRank] = frontPlayer;
+        rankedList[calledPlayer] -= 1;
+        rankedList[frontPlayer] += 1;
     };
 
     for (const callName of callings) {
-        const rank = map.get(callName);
-        const nextPlayer = replaceRanking(rank);
-        map.set(callName, rank - 1);
-        map.set(nextPlayer, map.get(nextPlayer) + 1);
+        let backRank = rankedList[callName];
+        replacePlayer(backRank, backRank - 1);
     }
+
     return players;
 }
