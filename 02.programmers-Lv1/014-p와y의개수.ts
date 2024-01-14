@@ -1,10 +1,12 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/12916
 
 export function solution(s: string) {
-    const str = s.toUpperCase();
-    return str.split('P').length === str.split('Y').length;
-}
+    const map = new Map();
+    map.set('P', 0);
+    map.set('Y', 0);
 
-//s를 모두 대문자로 변환하기
-//s를 순회하면서 p개수와 y개수 구하기
-//결과가 0이면 true
+    for (const v of s.toUpperCase()) {
+        map.set(v, (map.get(v) ?? 0) + 1);
+    }
+    return map.get('P') === map.get('Y');
+}
