@@ -2,7 +2,7 @@
 
 export function solution(s: string) {
     const str = s.toUpperCase();
-    return str.split('P').length === str.split('Y').length ? true : false;
+    return str.split('P').length === str.split('Y').length;
 }
 
 //s를 모두 대문자로 변환하기
