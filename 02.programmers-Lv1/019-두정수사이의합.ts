@@ -3,9 +3,9 @@
 import _ from 'lodash';
 
 export function solution(a: number, b: number) {
-    const min = a < b ? a : b;
+    const min = _.min([a, b])!;
     const max = min + Math.abs(a - b);
-    return _.range(min, max + 1).reduce((a, b) => a + b);
+    return _.sum(_.range(min, max + 1));
 }
 
 // lodash 사용하지 않는 풀이
