@@ -2,12 +2,13 @@
 
 export function solution(brown: number, yellow: number) {
     //x = ((brown-4)/2 + 루트 (brown-4)/2의 제곱 - 4*yellow) /2
-    const x =
+    const yellow1 =
         ((brown - 4) / 2 +
             Math.sqrt(Math.pow((brown - 4) / 2, 2) - 4 * yellow)) /
         2;
-    const y = yellow / x;
-    return [Math.max(x + 2, y + 2), Math.min(x + 2, y + 2)];
+    const yellow2 = yellow / yellow1;
+    const carpet = [yellow1 + 2, yellow2 + 2];
+    return [Math.max(...carpet), Math.min(...carpet)];
 }
 
 // 0 0 0 0 0 0 0 0
