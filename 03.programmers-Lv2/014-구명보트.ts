@@ -7,13 +7,10 @@ export function solution(people: number[], limit: number) {
     let j = people.length - 1;
     while (i <= j) {
         if (people[i] + people[j] <= limit) {
-            boat++;
             i++;
-            j--;
-        } else {
-            boat++;
-            j--;
         }
+        boat++;
+        j--;
     }
     return boat;
 }
