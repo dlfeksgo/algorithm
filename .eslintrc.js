@@ -20,5 +20,6 @@ module.exports = {
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': 'warn',
         'prefer-const': 'off',
+        'no-constant-condition': ['error', { checkLoops: false }],
     },
 };
