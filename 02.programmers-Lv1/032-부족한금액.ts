@@ -5,7 +5,7 @@ export function solution(price: number, money: number, count: number) {
     for (let i = 1; i <= count; i++) {
         cost += price * i;
     }
-    return cost > money ? cost - money : 0;
+    return Math.max(cost, money) - money;
 }
 
 // 1. 이용료 price
