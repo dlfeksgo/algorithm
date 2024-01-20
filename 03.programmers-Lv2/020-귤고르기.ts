@@ -10,12 +10,10 @@ export function solution(k: number, tangerine: number[]) {
     const sortedArr = [...map].sort((a, b) => b[1] - a[1]);
 
     for (const [, count] of sortedArr) {
-        if (count >= k) {
-            answer++;
-            break;
-        } else {
+        answer++;
+        if (count >= k) break;
+        else {
             k -= count;
-            answer++;
         }
     }
     return answer;
