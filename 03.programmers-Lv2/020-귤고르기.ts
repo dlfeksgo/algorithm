@@ -12,9 +12,7 @@ export function solution(k: number, tangerine: number[]) {
     for (const [, count] of sortedArr) {
         answer++;
         if (count >= k) break;
-        else {
-            k -= count;
-        }
+        k -= count;
     }
     return answer;
 }
