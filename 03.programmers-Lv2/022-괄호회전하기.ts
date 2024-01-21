@@ -18,7 +18,7 @@ const getIsCorrect = (arr: string[]) => {
             else return false;
         }
     }
-    return stack.length === 0 && true;
+    return stack.length === 0;
 };
 
 export function solution(s: string) {
@@ -26,7 +26,7 @@ export function solution(s: string) {
     for (let i = 0; i < s.length; i++) {
         const rotateStr = [...s.slice(i, s.length), ...s.slice(0, i)];
         const isCorrect = getIsCorrect(rotateStr);
-        answer += +isCorrect;
+        if (isCorrect) answer++;
     }
     return answer;
 }
