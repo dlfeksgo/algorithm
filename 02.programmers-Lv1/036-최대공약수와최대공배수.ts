@@ -1,23 +1,14 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/12940
 
-const getGCD = (num1: number, num2: number) => {
-    let gcd = 1;
-
-    for (let i = 2; i <= Math.min(num1, num2); i++) {
-        if (num1 % i === 0 && num2 % i === 0) gcd = i;
-    }
-    return gcd;
+//gcd(a, b) = gcd(b, a % b)
+const gcd = (a: number, b: number): number | void => {
+    if (b === 0) return a;
+    return gcd(b, a % b);
 };
 
-const getLCM = (num1: number, num2: number) => {
-    let lcm = 1;
-    while (true) {
-        if (lcm % num1 === 0 && lcm % num2 === 0) break;
-        lcm++;
-    }
-    return lcm;
-};
+//gcd * lcm = a * b
+const lcm = (a: number, b: number) => (a * b) / gcd(a, b)!;
 
 export function solution(n: number, m: number) {
-    return [getGCD(n, m), getLCM(n, m)];
+    return [gcd(n, m), lcm(n, m)];
 }
