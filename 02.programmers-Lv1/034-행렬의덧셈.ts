@@ -3,8 +3,8 @@
 import _ from 'lodash';
 
 export function solution(arr1: number[][], arr2: number[][]) {
-    return arr1.map((rows, rowIdx) =>
-        _.zip(rows, arr2[rowIdx]).map(([a, b]) => a! + b!),
+    return _.zip(arr1, arr2).map(([a, b]) =>
+        _.zip(a, b).map(([a, b]) => a! + b!),
     );
 }
 
