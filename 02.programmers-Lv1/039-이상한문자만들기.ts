@@ -7,8 +7,9 @@ export function solution(s: string) {
             v
                 .split('')
                 .map((char, i) => {
-                    if (i % 2 === 0) return char.toUpperCase();
-                    return char.toLowerCase();
+                    return i % 2 === 0
+                        ? char.toUpperCase()
+                        : char.toLowerCase();
                 })
                 .join(''),
         )

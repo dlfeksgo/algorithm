@@ -4,8 +4,8 @@ export function solution(t: string, p: string) {
     let count = 0;
     const circuitCnt = t.length - p.length + 1;
     for (let i = 0; i < circuitCnt; i++) {
-        const str = Number(t.slice(i, p.length + i));
-        if (str <= Number(p)) count++;
+        const num = Number(t.slice(i, p.length + i));
+        if (num <= Number(p)) count++;
     }
     return count;
 }

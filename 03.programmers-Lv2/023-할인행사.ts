@@ -1,5 +1,7 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/131127
 
+import _ from 'lodash';
+
 export function solution(want: string[], number: number[], discount: string[]) {
     let day = 0;
 
@@ -8,14 +10,14 @@ export function solution(want: string[], number: number[], discount: string[]) {
         wantMap.set(v, number[i]);
     }
 
-    for (let i = 0; i <= discount.length; i++) {
+    for (const [i] of discount.entries()) {
         const copyMap = new Map(wantMap);
         for (let j = i; j < i + 10; j++) {
             const name = discount[j];
             const val = copyMap.get(name);
             if (val) copyMap.set(name, val - 1);
         }
-        if (![...copyMap.values()].reduce((a, b) => a + b)) day++;
+        if (!_.sum([...copyMap.values()])) day++;
     }
     return day;
 }
