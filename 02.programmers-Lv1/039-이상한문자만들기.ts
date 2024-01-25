@@ -6,11 +6,9 @@ export function solution(s: string) {
         .map((v) =>
             v
                 .split('')
-                .map((char, i) => {
-                    return i % 2 === 0
-                        ? char.toUpperCase()
-                        : char.toLowerCase();
-                })
+                .map((char, i) =>
+                    i % 2 === 0 ? char.toUpperCase() : char.toLowerCase(),
+                )
                 .join(''),
         )
         .join(' ');

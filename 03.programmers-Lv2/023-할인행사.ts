@@ -10,7 +10,7 @@ export function solution(want: string[], number: number[], discount: string[]) {
         wantMap.set(v, number[i]);
     }
 
-    for (const [i] of discount.entries()) {
+    for (const i of discount.keys()) {
         const copyMap = new Map(wantMap);
         for (let j = i; j < i + 10; j++) {
             const name = discount[j];
