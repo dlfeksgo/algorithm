@@ -3,14 +3,12 @@
 export function solution(s: string) {
     const answer: number[] = [];
     for (let i = 0; i < s.length; i++) {
-        const tempArr: number[] = [];
-        for (let j = 0; j <= i - 1; j++) {
-            if (s[i] === s[j]) tempArr.push(i - j);
+        const charIdx = s.slice(0, i).lastIndexOf(s[i], i);
+        if (charIdx < 0) {
+            answer.push(-1);
+            continue;
         }
-        if (!tempArr.length) answer.push(-1);
-        else answer.push(tempArr.pop()!);
+        answer.push(i - charIdx);
     }
     return answer;
 }
-
-console.log(solution('foo'));

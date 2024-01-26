@@ -3,11 +3,10 @@
 export function solution(arr1: number[][], arr2: number[][]) {
     return arr1.map((arr1Row) => {
         const sumArr: number[] = [];
-        const arr2Col = arr2[0];
-        for (let i = 0; i < arr2Col.length; i++) {
+        for (const arr2Idx of arr2[0].keys()) {
             let sum = 0;
-            for (let j = 0; j < arr1Row.length; j++) {
-                sum += arr1Row[j] * arr2[j][i];
+            for (const [i, v] of arr1Row.entries()) {
+                sum += v * arr2[i][arr2Idx];
             }
             sumArr.push(sum);
         }

@@ -10,9 +10,8 @@ const changeChar = (code: number, n: number) => {
 export function solution(s: string, n: number) {
     return [...s]
         .map((char) => {
-            if (char === ' ') return ' ';
-            const code = char.charCodeAt(0);
-            return changeChar(code, n);
+            if (char === ' ') return char;
+            return changeChar(char.charCodeAt(0), n);
         })
         .join('');
 }
