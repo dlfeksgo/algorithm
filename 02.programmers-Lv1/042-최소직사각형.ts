@@ -2,10 +2,11 @@
 
 export function solution(sizes: number[][]) {
     const width: number[] = [];
-    const heigh: number[] = [];
-    for (const [w, h] of sizes) {
-        width.push(w < h ? h : w);
-        heigh.push(w < h ? w : h);
+    const height: number[] = [];
+    for (let [w, h] of sizes) {
+        [w, h] = w < h ? [w, h] : [h, w];
+        width.push(w);
+        height.push(h);
     }
-    return Math.max(...width) * Math.max(...heigh);
+    return Math.max(...width) * Math.max(...height);
 }

@@ -11,14 +11,13 @@ export function solution(cacheSize: number, cities: string[]) {
     for (const v of cities) {
         const city = v.toUpperCase();
         const cityIdx = cache.indexOf(city);
-        if (cityIdx > -1) {
-            cache.splice(cityIdx, 1);
-            time += HIT_TIME;
-        } else {
-            if (cache.length >= cacheSize) cache.shift();
-            time += MISS_TIME;
-        }
+        const isHit = cityIdx > -1;
+
+        if (isHit) cache.splice(cityIdx, 1);
+        if (cache.length >= cacheSize) cache.shift();
         cache.push(city);
+
+        time += isHit ? HIT_TIME : MISS_TIME;
     }
     return time;
 }

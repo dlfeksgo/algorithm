@@ -4,11 +4,7 @@ export function solution(s: string) {
     const answer: number[] = [];
     for (let i = 0; i < s.length; i++) {
         const charIdx = s.slice(0, i).lastIndexOf(s[i], i);
-        if (charIdx < 0) {
-            answer.push(-1);
-            continue;
-        }
-        answer.push(i - charIdx);
+        answer.push(charIdx > -1 ? i - charIdx : -1);
     }
     return answer;
 }
