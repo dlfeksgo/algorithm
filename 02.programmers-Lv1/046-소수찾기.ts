@@ -1,18 +1,18 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/12921
 
+import _ from 'lodash';
+
 export function solution(n: number) {
-    const number = Array(n + 1)
-        .fill(0)
-        .map((_, i) => i);
+    const numRange = _.range(0, n + 1);
 
     for (let i = 2; i <= Math.sqrt(n); i++) {
         for (let j = i * 2; j <= n; j += i) {
-            if (!number[j]) continue;
-            if (number[j] % i === 0) number[j] = 0;
+            if (!numRange[j]) continue;
+            if (numRange[j] % i === 0) numRange[j] = 0;
         }
     }
 
-    return number.filter((v) => v !== 0).length - 1;
+    return numRange.filter((v) => v !== 0).length - 1;
 }
 
 // export function solution(n: number) {
