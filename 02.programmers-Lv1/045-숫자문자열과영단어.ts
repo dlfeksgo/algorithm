@@ -14,7 +14,7 @@ export function solution(s: string) {
         nine: '9',
     };
 
-    for (const word of Object.keys(words)) {
+    for (const word in words) {
         s = s.replace(word, words[word]);
     }
     return Number(s);
