@@ -6,7 +6,7 @@ export function solution(n: number) {
     isPrimes[1] = false;
 
     for (let i = 2; i <= Math.sqrt(n); i++) {
-        for (let j = i * 2; j <= n; j += i) {
+        for (let j = i * i; j <= n; j += i) {
             if (!isPrimes[j]) continue;
             if (j % i === 0) isPrimes[j] = false;
         }
@@ -14,7 +14,6 @@ export function solution(n: number) {
 
     return isPrimes.filter((v) => v === true).length;
 }
-
 // export function solution(n: number) {
 // const set = new Set();
 
@@ -30,5 +29,3 @@ export function solution(n: number) {
 
 // return n - set.size - 1;
 // }
-
-console.log(solution(10));
