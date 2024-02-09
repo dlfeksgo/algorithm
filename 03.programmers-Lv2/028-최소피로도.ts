@@ -4,17 +4,18 @@ export function solution(k: number, dungeons: number[][]) {
     const visited = Array(dungeons.length).fill(false);
     let maxDungeons = 0;
 
-    const recursiveDungeonExplore = (remainingFatigue: number, count: number) => {
+    const exploreDungeon = (idx: number, remainingFatigue: number, count: number) => {
         maxDungeons = Math.max(maxDungeons, count);
+        if (visited[idx]) return;
+        visited[idx] = true;
         for (const [i, [requiredFatigue, consumedFatigue]] of dungeons.entries()) {
-            if (!visited[i] && remainingFatigue >= requiredFatigue) {
-                visited[i] = true;
-                recursiveDungeonExplore(remainingFatigue - consumedFatigue, count + 1);
-                visited[i] = false;
+            if (remainingFatigue >= requiredFatigue) {
+                exploreDungeon(i, remainingFatigue - consumedFatigue, count + 1);
             }
         }
+        visited[idx] = false;
     };
-    recursiveDungeonExplore(k, 0);
+    exploreDungeon(0, k, 0);
     return maxDungeons;
 }
 
