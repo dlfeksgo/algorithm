@@ -7,7 +7,7 @@ export function solution(n: number) {
 
     for (let i = 2; i <= Math.sqrt(n); i++) {
         for (let j = i * i; j <= n; j += i) {
-            if (isPrimes[j] && j % i === 0) isPrimes[j] = false;
+            if (isPrimes[j]) isPrimes[j] = false;
         }
     }
 
