@@ -1,15 +1,11 @@
 //https://www.acmicpc.net/problem/1012
 
-const [$n, ...lines] = require('fs')
-    .readFileSync('input.txt')
-    .toString()
-    .trim()
-    .split('\n');
+const [$n, ...lines] = require('fs').readFileSync('input.txt').toString().trim().split('\n');
 
 const testCase = Number($n);
 let M: number, N: number, K: number;
 
-const recursiveFindPosition = (graph: number[][], y: number, x: number) => {
+const colorWormsMap = (graph: number[][], y: number, x: number) => {
     const stack = [[x, y]];
     //좌,우,상,하
     const distances = [
@@ -42,7 +38,7 @@ const getWorms = (graph: number[][]) => {
         for (let j = 0; j < M; j++) {
             if (graph[i][j]) {
                 answer++;
-                recursiveFindPosition(graph, i, j);
+                colorWormsMap(graph, i, j);
             }
         }
     }
