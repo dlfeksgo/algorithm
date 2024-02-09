@@ -9,7 +9,7 @@ const [$n, ...lines] = require('fs')
 const testCase = Number($n);
 let M: number, N: number, K: number;
 
-const dfs = (graph: number[][], y: number, x: number) => {
+const recursiveFindPosition = (graph: number[][], y: number, x: number) => {
     const stack = [[x, y]];
     //좌,우,상,하
     const distances = [
@@ -42,7 +42,7 @@ const getWorms = (graph: number[][]) => {
         for (let j = 0; j < M; j++) {
             if (graph[i][j]) {
                 answer++;
-                dfs(graph, i, j);
+                recursiveFindPosition(graph, i, j);
             }
         }
     }
