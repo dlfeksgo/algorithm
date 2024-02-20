@@ -1,3 +1,5 @@
+//https://www.acmicpc.net/problem/1260
+
 const [input, ...lines]: string[] = require('fs').readFileSync('input.txt').toString().trim().split('\n');
 const [N, , V] = input.split(' ').map(Number);
 const graph: number[][] = Array.from(Array(N + 1), () => []);

@@ -1,3 +1,5 @@
+//https://www.acmicpc.net/problem/2667
+
 const [n, ...lines]: string[] = require('fs').readFileSync('input.txt').toString().trim().split('\n');
 const N = Number(n);
 const villageMap: number[][] = lines.map((v) => v.split('').map(Number));
