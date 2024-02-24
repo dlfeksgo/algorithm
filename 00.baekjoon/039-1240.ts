@@ -3,7 +3,7 @@
 const input: string[] = require('fs').readFileSync('input.txt').toString().trim().split('\n');
 
 const [N, M] = input[0].split(' ').map(Number);
-const links: number[][][] = Array.from(Array(N + 1), () => []);
+const links: [number, number][][] = Array.from(Array(N + 1), () => []);
 let visited: boolean[];
 let count = 0;
 
@@ -20,7 +20,9 @@ const findPath = (start: number, end: number, dist: number) => {
     if (visited[start]) return;
     visited[start] = true;
     for (const [y, point] of links[start]) {
-        findPath(y, end, dist + point);
+        const totalDist = dist + point;
+        findPath(y, end, totalDist);
+        if (count === totalDist) break;
     }
 };
 
