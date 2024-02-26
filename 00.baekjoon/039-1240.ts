@@ -5,7 +5,6 @@ const input: string[] = require('fs').readFileSync('input.txt').toString().trim(
 const [N, M] = input[0].split(' ').map(Number);
 const links: [number, number][][] = Array.from(Array(N + 1), () => []);
 let visited: boolean[];
-let count = 0;
 
 for (let i = 1; i <= N - 1; i++) {
     const [x, y, point] = input[i].split(' ').map(Number);
@@ -13,22 +12,20 @@ for (let i = 1; i <= N - 1; i++) {
     links[y].push([x, point]);
 }
 
-const findPath = (start: number, end: number, dist: number) => {
-    if (start === end) {
-        return (count = dist);
-    }
+const findPath = (start: number, end: number, dist: number): number | undefined => {
+    if (start === end) return dist;
+
     if (visited[start]) return;
     visited[start] = true;
+
     for (const [y, point] of links[start]) {
-        const totalDist = dist + point;
-        findPath(y, end, totalDist);
-        if (count === totalDist) break;
+        const result: number | undefined = findPath(y, end, dist + point);
+        if (result) return result;
     }
 };
 
 for (let i = N; i < N + M; i++) {
     const [start, end] = input[i].split(' ').map(Number);
     visited = Array(N + 1).fill(false);
-    findPath(start, end, 0);
-    console.log(count);
+    console.log(findPath(start, end, 0));
 }
