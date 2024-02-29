@@ -16,8 +16,8 @@ const bfs = (row: number, col: number) => {
     while (queue.length) {
         const [curR, curC] = queue.shift()!;
 
-        for (let i = 0; i < 4; i++) {
-            const [r, c] = [ds[i][0] + curR, ds[i][1] + curC];
+        for (const [dr, dc] of ds) {
+            const [r, c] = [curR + dr, curC + dc];
             if (r < 0 || c < 0 || r >= N || c >= M) continue;
             if (graph[r][c] === 1) {
                 graph[r][c] = graph[curR][curC] + 1;
