@@ -16,7 +16,7 @@ const ds = [
 
 let boardSize: number, start: number[], end: number[], visited: boolean[][];
 
-const bfs = () => {
+const getKnightMinMove = () => {
     const queue = [[...start, 0]];
 
     while (queue.length) {
@@ -40,5 +40,5 @@ for (let i = 0; i < testCase; i++) {
     start = caseUnit[1].split(' ').map(Number);
     end = caseUnit[2].split(' ').map(Number);
     visited = Array.from(Array(boardSize), () => Array(boardSize).fill(false));
-    console.log(bfs());
+    console.log(getKnightMinMove());
 }
