@@ -21,17 +21,17 @@ for (const [startCol, startRow, endCol, endRow] of coloredGrid) {
 }
 
 const bfs = (row: number, col: number) => {
-    const queue = [[row, col]];
+    const queue: [number, number][] = [[row, col]];
     let count = 0;
 
     while (queue.length) {
         const [r1, c1] = queue.shift()!;
+        grid[r1][c1] = 1;
         count++;
 
         for (const [r, c] of ds) {
             const [nr, nc] = [r1 + r, c1 + c];
             if (nr >= 0 && nc >= 0 && nr < maxRow && nc < maxCol && !grid[nr][nc]) {
-                grid[nr][nc] = 1;
                 queue.push([nr, nc]);
             }
         }

@@ -14,15 +14,17 @@ const ds = [
     [2, 1],
 ];
 
-let boardSize: number, start: number[], end: number[], visited: boolean[][];
+let boardSize: number, visited: boolean[][];
+let [startRow, startCol]: number[] = [];
+let [endRow, endCol]: number[] = [];
 
 const getKnightMinMove = () => {
-    const queue = [[...start, 0]];
+    const queue: [number, number, number][] = [[startRow, startCol, 0]];
 
     while (queue.length) {
         const [row, col, move] = queue.shift()!;
 
-        if (row === end[0] && col === end[1]) return move;
+        if (row === endRow && col === endCol) return move;
 
         for (const [r, c] of ds) {
             const [nr, nc] = [row + r, col + c];
@@ -37,8 +39,8 @@ const getKnightMinMove = () => {
 for (let i = 0; i < testCase; i++) {
     const caseUnit = lines.splice(0, 3);
     boardSize = Number(caseUnit[0]);
-    start = caseUnit[1].split(' ').map(Number);
-    end = caseUnit[2].split(' ').map(Number);
+    [startRow, startCol] = caseUnit[1].split(' ').map(Number);
+    [endRow, endCol] = caseUnit[2].split(' ').map(Number);
     visited = Array.from(Array(boardSize), () => Array(boardSize).fill(false));
     console.log(getKnightMinMove());
 }

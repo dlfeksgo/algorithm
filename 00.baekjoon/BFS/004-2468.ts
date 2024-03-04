@@ -18,16 +18,15 @@ for (const v of heightMap) {
 }
 
 const getMaxSafeAreas = (height: number, r: number, c: number) => {
-    const queue: number[][] = [[r, c]];
-    visited[r][c] = true;
+    const queue: [number, number][] = [[r, c]];
 
     while (queue.length) {
         const [row, col] = queue.shift()!;
+        visited[row][col] = true;
 
         for (const [r, c] of ds) {
             const [nr, nc] = [row + r, col + c];
             if (nr >= 0 && nc >= 0 && nr < N && nr < N && !visited[nr][nc] && heightMap[row][col] > height) {
-                visited[nr][nc] = true;
                 queue.push([nr, nc]);
             }
         }

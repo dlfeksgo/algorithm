@@ -13,15 +13,16 @@ for (const line of lines) {
 }
 
 const findRelationDistance = (start: number, end: number) => {
-    const queue = [[start, 0]];
-    visited[start] = true;
+    const queue: [number, number][] = [[start, 0]];
+
     while (queue.length) {
         const [person, ds] = queue.shift()!;
+        visited[person] = true;
+
         if (person === end) return ds;
 
         for (const v of familyMap[person]) {
             if (!visited[v]) {
-                visited[v] = true;
                 queue.push([v, ds + 1]);
             }
         }
