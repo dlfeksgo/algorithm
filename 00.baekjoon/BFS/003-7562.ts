@@ -23,13 +23,14 @@ const getKnightMinMove = () => {
 
     while (queue.length) {
         const [row, col, move] = queue.shift()!;
+        if (visited[row][col]) continue;
+        visited[row][col] = true;
 
         if (row === endRow && col === endCol) return move;
 
         for (const [r, c] of ds) {
             const [nr, nc] = [row + r, col + c];
-            if (nr >= 0 && nc >= 0 && nr < boardSize && nc < boardSize && !visited[nr][nc]) {
-                visited[nr][nc] = true;
+            if (nr >= 0 && nc >= 0 && nr < boardSize && nc < boardSize) {
                 queue.push([nr, nc, move + 1]);
             }
         }

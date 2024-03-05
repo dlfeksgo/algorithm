@@ -22,11 +22,12 @@ const getMaxSafeAreas = (height: number, r: number, c: number) => {
 
     while (queue.length) {
         const [row, col] = queue.shift()!;
+        if (visited[row][col]) continue;
         visited[row][col] = true;
 
         for (const [r, c] of ds) {
             const [nr, nc] = [row + r, col + c];
-            if (nr >= 0 && nc >= 0 && nr < N && nr < N && !visited[nr][nc] && heightMap[row][col] > height) {
+            if (nr >= 0 && nc >= 0 && nr < N && nr < N && heightMap[row][col] > height) {
                 queue.push([nr, nc]);
             }
         }

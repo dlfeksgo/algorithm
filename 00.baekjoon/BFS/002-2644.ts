@@ -17,14 +17,13 @@ const findRelationDistance = (start: number, end: number) => {
 
     while (queue.length) {
         const [person, ds] = queue.shift()!;
+        if (visited[person]) continue;
         visited[person] = true;
 
         if (person === end) return ds;
 
         for (const v of familyMap[person]) {
-            if (!visited[v]) {
-                queue.push([v, ds + 1]);
-            }
+            queue.push([v, ds + 1]);
         }
     }
 
