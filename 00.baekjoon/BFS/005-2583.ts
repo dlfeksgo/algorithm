@@ -26,12 +26,13 @@ const bfs = (row: number, col: number) => {
 
     while (queue.length) {
         const [r1, c1] = queue.shift()!;
+        if (grid[r1][c1]) continue;
         grid[r1][c1] = 1;
         count++;
 
         for (const [r, c] of ds) {
             const [nr, nc] = [r1 + r, c1 + c];
-            if (nr >= 0 && nc >= 0 && nr < maxRow && nc < maxCol && !grid[nr][nc]) {
+            if (nr >= 0 && nc >= 0 && nr < maxRow && nc < maxCol) {
                 queue.push([nr, nc]);
             }
         }
@@ -43,7 +44,6 @@ const answer: number[] = [];
 for (const [i, row] of grid.entries()) {
     for (const j of row.keys()) {
         if (!grid[i][j]) {
-            grid[i][j] = 1;
             answer.push(bfs(i, j));
         }
     }
