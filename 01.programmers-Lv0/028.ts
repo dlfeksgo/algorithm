@@ -1,26 +1,19 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/181925
 
+const cases: Record<string, string> = {
+    '1': 'w',
+    '-1': 's',
+    '10': 'd',
+    '-10': 'a',
+};
+
 export function solution(numLog: number[]) {
     let answer = '';
-    for (const [i, v] of numLog.entries()) {
-        const differ: number | string =
-            i === numLog.length - 1 ? '' : numLog[i + 1] - v;
-        switch (differ) {
-            case 1:
-                answer += 'w';
-                break;
-            case -1:
-                answer += 's';
-                break;
-            case 10:
-                answer += 'd';
-                break;
-            case -10:
-                answer += 'a';
-                break;
-            default:
-                break;
-        }
+    for (let i = 0; i < numLog.length - 1; i++) {
+        const differ = numLog[i + 1] - numLog[i];
+        answer += cases[differ];
     }
     return answer;
 }
+
+console.log(solution([0, 1, 0, 10, 0, 1, 0, 10, 0, -1, -2, -1]));
