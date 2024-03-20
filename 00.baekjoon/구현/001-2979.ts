@@ -1,22 +1,22 @@
-//https://lhoiktiv.tistory.com/499
+//https://www.acmicpc.net/problem/2979
 
 const [input, ...lines]: string[] = require('fs').readFileSync('input.txt').toString().trim().split('\n');
 const [A, B, C] = input.split(' ').map(Number);
-const recordMap = lines.map((line) => line.split(' ').map(Number));
+const recordMap: [number, number][] = lines.map((line) => line.split(' ').map(Number) as [number, number]);
 const price: Record<string, number> = {
     '1': A,
     '2': B,
     '3': C,
 };
 
-const setTimeSlot = (maxTime: number, map: number[][]) => {
-    const timeTable = Array(maxTime + 1).fill(0);
+const setTimeSlot = (maxTime: number, map: [number, number][]) => {
+    const timeSlot = Array(maxTime + 1).fill(0);
     for (const [entry, exit] of map) {
         for (let i = entry; i < exit; i++) {
-            timeTable[i]++;
+            timeSlot[i]++;
         }
     }
-    return timeTable;
+    return timeSlot;
 };
 
 const getParkingPrice = (timeSlot: number[]) => {
