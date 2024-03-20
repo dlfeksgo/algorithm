@@ -6,20 +6,26 @@ const [maxN, maxM] = [N - 8, M - 8];
 const MAX_COUNT = 64;
 const board = lines.map((line) => line.split(''));
 
-const white = ['WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW'];
-const black = ['BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB', 'BWBWBWBW', 'WBWBWBWB'];
-
 const calcMismatch = (r: number, c: number) => {
     let checkWhite = 0;
     let checkBlack = 0;
 
     for (let i = r; i < r + 8; i++) {
         for (let j = c; j < c + 8; j++) {
-            if (board[i][j] !== white[i - r][j - c]) checkWhite++;
-            if (board[i][j] !== black[i - r][j - c]) checkBlack++;
+            if ((i + j) % 2 === 0) {
+                if (board[i][j] === 'W') {
+                    checkWhite++;
+                    continue;
+                }
+            } else {
+                if (board[i][j] === 'B') {
+                    checkWhite++;
+                    continue;
+                }
+            }
+            checkBlack++;
         }
     }
-
     return Math.min(checkWhite, checkBlack);
 };
 
