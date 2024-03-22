@@ -2,20 +2,27 @@
 
 const dwarfs: number[] = require('fs').readFileSync('input.txt').toString().trim().split('\n').map(Number);
 const maxHeight = 100;
-const totalDwarfsHeight = dwarfs.reduce((a, b) => a + b);
-dwarfs.sort((a, b) => a - b);
+const totalDwarfsHeight = dwarfs.reduce((x, y) => x + y);
 
 const findDwarfs = (total: number, maxSum: number) => {
-    let filteredDwarfs: number[] = [];
-    for (const [i, v1] of dwarfs.entries()) {
-        for (const v2 of dwarfs.slice(i + 1)) {
-            if (v1 + v2 === total - maxSum) {
-                filteredDwarfs = dwarfs.filter((x) => x !== v1 && x !== v2);
-            }
+    for (const [v1, v2] of combination(dwarfs, 2)) {
+        if (v1 + v2 === total - maxSum) {
+            return dwarfs.filter((x) => x !== v1 && x !== v2);
         }
     }
-    return filteredDwarfs;
+    throw new Error();
 };
 
-const result = findDwarfs(totalDwarfsHeight, maxHeight);
+function* combination<T>(xs: T[], pick: number): Iterable<T[]> {
+    if (xs.length === 0 || pick === 0) return yield [];
+
+    const [first, ...rest] = xs;
+    yield* combination(rest, pick);
+
+    for (const i of combination(rest, pick - 1)) {
+        yield [first, ...i];
+    }
+}
+
+const result = findDwarfs(totalDwarfsHeight, maxHeight).sort((x, y) => x - y);
 console.log(result.join('\n'));
