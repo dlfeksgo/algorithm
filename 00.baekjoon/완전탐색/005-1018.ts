@@ -6,32 +6,26 @@ const [maxN, maxM] = [N - 8, M - 8];
 const MAX_COUNT = 64;
 const board = lines.map((line) => line.split(''));
 
-const countMinDiffer = (r: number, c: number) => {
-    const count: Record<string, number> = {
-        white: 0,
-        black: 0,
-    };
-
+const getDifferCountByColor = (r: number, c: number, expectedColor: string) => {
+    let changedCount = 0;
     for (let i = r; i < r + 8; i++) {
         for (let j = c; j < c + 8; j++) {
             const val = board[i][j];
-            let color = '';
             if ((i + j) % 2 === 0) {
-                color = val === 'W' ? 'white' : 'black';
+                if (val === expectedColor) changedCount++;
             } else {
-                color = val === 'B' ? 'white' : 'black';
+                if (val !== expectedColor) changedCount++;
             }
-            count[color] += 1;
         }
     }
-    return Math.min(count.white, count.black);
+    return Math.min(MAX_COUNT - changedCount, changedCount);
 };
 
 const getMinChangeCount = (max: number) => {
     let minCount = max;
     for (let i = 0; i <= maxN; i++) {
         for (let j = 0; j <= maxM; j++) {
-            minCount = Math.min(minCount, countMinDiffer(i, j));
+            minCount = Math.min(minCount, getDifferCountByColor(i, j, 'W'));
         }
     }
     return minCount;
