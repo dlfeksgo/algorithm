@@ -10,11 +10,11 @@ const getDifferCountByColor = (r: number, c: number, expectedColor: string) => {
     let changedCount = 0;
     for (let i = r; i < r + 8; i++) {
         for (let j = c; j < c + 8; j++) {
-            const val = board[i][j];
+            const currentColor = board[i][j];
             if ((i + j) % 2 === 0) {
-                if (val === expectedColor) changedCount++;
+                if (currentColor === expectedColor) changedCount++;
             } else {
-                if (val !== expectedColor) changedCount++;
+                if (currentColor !== expectedColor) changedCount++;
             }
         }
     }
