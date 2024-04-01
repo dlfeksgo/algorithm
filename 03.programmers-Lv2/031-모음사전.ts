@@ -2,23 +2,19 @@
 
 export function findWordIdx(word: string) {
     const vowels = ['A', 'E', 'I', 'O', 'U'];
-    const dictionary = [];
-    for (let i = 1; i <= 5; i++) {
-        for (const curWord of permutation(vowels, i)) {
-            dictionary.push(curWord.join(''));
+    const answerMap = new Map();
+    let count = 0;
+
+    const dfs = (str: string = '') => {
+        if (str.length > 5) return;
+        answerMap.set(str, count);
+        count++;
+        for (const v of vowels) {
+            dfs(str + v);
         }
-    }
-    dictionary.sort();
-    return dictionary.indexOf(word) + 1;
+    };
+    dfs();
+    return answerMap.get(word);
 }
 
 console.log(findWordIdx('AAAE'));
-
-function* permutation<T>(xs: T[], repeat: number): Iterable<T[]> {
-    if (repeat === 0) return yield [];
-    for (const x of xs) {
-        for (const perm of permutation(xs, repeat - 1)) {
-            yield [x, ...perm];
-        }
-    }
-}
