@@ -1,20 +1,22 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/84512
 
-export function findWordIdx(word: string) {
+function* generateWords(): Iterable<[string, number]> {
     const vowels = ['A', 'E', 'I', 'O', 'U'];
-    const answerMap = new Map();
     let count = 0;
-
-    const dfs = (str: string = '') => {
+    function* combination(str: string = ''): Iterable<[string, number]> {
         if (str.length > 5) return;
-        answerMap.set(str, count);
-        count++;
+        yield [str, count++];
         for (const v of vowels) {
-            dfs(str + v);
+            yield* combination(str + v);
         }
-    };
-    dfs();
-    return answerMap.get(word);
+    }
+    yield* combination();
+}
+
+function findWordIdx(word: string): number | undefined {
+    for (const [v, count] of generateWords()) {
+        if (v === word) return count;
+    }
 }
 
 console.log(findWordIdx('AAAE'));
