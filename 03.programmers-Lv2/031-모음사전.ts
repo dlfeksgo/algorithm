@@ -1,22 +1,20 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/84512
 
-function* generateWords(): Iterable<[string, number]> {
-    const vowels = ['A', 'E', 'I', 'O', 'U'];
+function* generateWords<T>(xs: T[], str: string = ''): Iterable<string> {
+    if (str.length > 5) return;
+    yield str;
+    for (const v of xs) {
+        yield* generateWords(xs, str + v);
+    }
+}
+
+function findWordIdx(word: string) {
     let count = 0;
-    function* combination(str: string = ''): Iterable<[string, number]> {
-        if (str.length > 5) return;
-        yield [str, count++];
-        for (const v of vowels) {
-            yield* combination(str + v);
-        }
-    }
-    yield* combination();
-}
-
-function findWordIdx(word: string): number | undefined {
-    for (const [v, count] of generateWords()) {
+    const vowels = ['A', 'E', 'I', 'O', 'U'];
+    for (const v of generateWords(vowels)) {
         if (v === word) return count;
+        count++;
     }
 }
 
-console.log(findWordIdx('AAAE'));
+console.log(findWordIdx('AAAAE'));
