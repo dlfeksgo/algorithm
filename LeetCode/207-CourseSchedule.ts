@@ -1,34 +1,42 @@
 //https://leetcode.com/problems/course-schedule/description/
 
+//사이클이 존재하면 안된다.(순환이 되면 안된다)
 export function canFinish(numCourses: number, prerequisites: number[][]): boolean {
-    const scheduleGraph: number[][] = Array.from(Array(numCourses), () => []);
-    const completed: number[] = Array(numCourses).fill(0);
-    const visited: number[] = Array(numCourses).fill(0);
+    const adjacencyList: number[][] = Array.from({ length: numCourses }, () => []);
+    const incomingEdges: number[] = Array(numCourses).fill(0);
 
-    for (const [second, first] of prerequisites) {
-        scheduleGraph[second].push(first);
+    //adjacencyList의 idx는 선행 강의이고, 원소는 이 강의 이후에 들을 수 있는 것들이다.
+    for (const [course, prereq] of prerequisites) {
+        adjacencyList[prereq].push(course);
+        incomingEdges[course]++;
     }
 
-    const isNextCourse = (courseIdx: number): boolean => {
-        if (completed[courseIdx]) return false;
-        if (visited[courseIdx]) return true;
+    const queue: number[] = [];
+    let coursesTaken = 0;
 
-        completed[courseIdx] = 1;
-        visited[courseIdx] = 1;
+    //선행 강의가 없다는 것은 바로 수강이 가능하다는 뜻이다.
+    for (const [course, cnt] of incomingEdges.entries()) {
+        if (!cnt) queue.push(course);
+    }
 
-        for (const i of scheduleGraph[courseIdx]) {
-            if (!isNextCourse(i)) return false;
+    //수강이 가능한 강의가 없을 때까지 반복한다.
+    while (queue.length) {
+        const currentCourse = queue.shift()!;
+        coursesTaken++;
+
+        //현재 강의를 듣기 위한 선행 강의들을 순회한다.
+        //해당하는 선행 강의의 수를 차감한다.
+        for (const pre of adjacencyList[currentCourse]) {
+            incomingEdges[pre]--;
+            if (!incomingEdges[pre]) queue.push(pre);
         }
-
-        completed[courseIdx] = 0;
-        return true;
-    };
-
-    for (const i of scheduleGraph.keys()) {
-        if (!isNextCourse(i)) return false;
     }
-
-    return true;
+    return coursesTaken === numCourses;
 }
 
-canFinish(2, [[1, 0]]);
+console.log(
+    canFinish(2, [
+        [0, 1],
+        [1, 0],
+    ]),
+);
