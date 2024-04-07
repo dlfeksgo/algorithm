@@ -5,7 +5,6 @@ export function canFinish(numCourses: number, prerequisites: number[][]): boolea
     const adjacencyList: number[][] = Array.from({ length: numCourses }, () => []);
     const incomingEdges: number[] = Array(numCourses).fill(0);
 
-    //adjacencyList의 idx는 선행 강의이고, 원소는 이 강의 이후에 들을 수 있는 것들이다.
     for (const [course, prereq] of prerequisites) {
         adjacencyList[prereq].push(course);
         incomingEdges[course]++;
@@ -15,20 +14,21 @@ export function canFinish(numCourses: number, prerequisites: number[][]): boolea
     let coursesTaken = 0;
 
     //선행 강의가 없다는 것은 바로 수강이 가능하다는 뜻이다.
-    for (const [course, cnt] of incomingEdges.entries()) {
-        if (!cnt) queue.push(course);
+    function canCourseProceed(course: number) {
+        if (!incomingEdges[course]) queue.push(course);
     }
 
-    //수강이 가능한 강의가 없을 때까지 반복한다.
+    //for...of문 대체로 course idx로만 체크
+    for (let i = 0; i < numCourses; i++) {
+        canCourseProceed(i);
+    }
+
     while (queue.length) {
         const currentCourse = queue.shift()!;
         coursesTaken++;
 
-        //현재 강의를 듣기 위한 선행 강의들을 순회한다.
-        //해당하는 선행 강의의 수를 차감한다.
         for (const pre of adjacencyList[currentCourse]) {
-            incomingEdges[pre]--;
-            if (!incomingEdges[pre]) queue.push(pre);
+            if (!--incomingEdges[pre]) canCourseProceed(pre);
         }
     }
     return coursesTaken === numCourses;
