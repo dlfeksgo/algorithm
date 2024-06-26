@@ -9,7 +9,7 @@ export function findMaxConsecutiveOnes(nums: number[]): number {
     if (!num) count = 0;
     max = Math.max(count, max);
   }
-  return count;
+  return max;
 }
 
 console.log(findMaxConsecutiveOnes([1, 1, 0, 1, 1, 1]));
