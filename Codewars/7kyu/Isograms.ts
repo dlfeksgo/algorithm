@@ -1,3 +1,5 @@
+// https://www.codewars.com/kata/54ba84be607a92aa900000f1
+
 // Best Practice
 export function isIsogram(str: string) {
   return new Set(str.toUpperCase()).size === str.length;
