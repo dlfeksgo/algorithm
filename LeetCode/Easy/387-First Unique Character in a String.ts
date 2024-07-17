@@ -8,9 +8,7 @@ export function firstUniqChar(s: string): number {
     map.set(char, value + 1);
   }
 
-  const idx = [...s].findIndex((char) => map.get(char) === 1);
-
-  return idx >= 0 ? idx : -1;
+  return [...s].findIndex((char) => map.get(char) === 1);
 }
 
 // O(n2)
