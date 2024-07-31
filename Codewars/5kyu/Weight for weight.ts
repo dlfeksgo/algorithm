@@ -4,7 +4,7 @@ export function orderWeight(s: string): string {
   const weight = (a: string): number => a.split('').reduce((sum, digit) => sum + +digit, 0);
 
   const compare = (a: string, b: string): number => {
-    let weightDiff = weight(a) - weight(b);
+    const weightDiff = weight(a) - weight(b);
     return weightDiff ? weightDiff : a > b ? 1 : -1;
   };
 
