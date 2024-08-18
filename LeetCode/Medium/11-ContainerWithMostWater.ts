@@ -11,7 +11,11 @@ export function maxArea(height: number[]): number {
   let maxWater = 0;
 
   while (left < right) {
-    const [leftH, rightH] = [height[left], height[right]];
+    // const [leftH, rightH] = [height[left], height[right]];
+    // 메모리를 고려하여 원시값으로 적용
+    const leftH = height[left];
+    const rightH = height[right];
+
     // left와 right는 index이므로 Math.abs가 필요하지 않다
     const water = (right - left) * (leftH < rightH ? leftH : rightH);
 
