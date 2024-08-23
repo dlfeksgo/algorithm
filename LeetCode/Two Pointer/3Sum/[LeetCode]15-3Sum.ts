@@ -1,5 +1,3 @@
-//https://leetcode.com/problems/3sum/
-
 //Two-pointer
 export function threeSum(nums: number[]): number[][] {
   nums.sort((a, b) => a - b);
@@ -22,7 +20,6 @@ export function threeSum(nums: number[]): number[][] {
         result.push([nums[i], nums[j], nums[k]]);
 
         // 합이 0인 경우에 다음 j값과 이전 k값이 중복되지 않을 때까지 값을 pointer를 변경한다.
-        // i,j,k가 모두 index이므로 크기 비교 조건이 필요하다.
         while (j < k && nums[j] === nums[j + 1]) {
           j++;
         }
